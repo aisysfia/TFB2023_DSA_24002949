@@ -1,3 +1,3 @@
-# TFB2023_DSA_24002949
-## Lab Tasks G1
+# TFB2023:Algorithm and Data Structure - May 2025
+## Lab Tasks Group 1
 ID : 24002949
