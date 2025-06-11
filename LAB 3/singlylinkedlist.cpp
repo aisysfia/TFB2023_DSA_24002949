@@ -1,3 +1,11 @@
+// Singly Linked List
+
+/*
+Lab 3
+Name : Nur Aisya Sofia
+ID : 24002949 
+*/
+
 #include <iostream>
 #include <string>
 using namespace std;
