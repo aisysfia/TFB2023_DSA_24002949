@@ -1,8 +1,7 @@
-
-/* 
-id = 24002949
-name = Nur Aisya Sofia
-lab = 1
+/*
+Lab 1
+Name : Nur Aisya Sofia
+ID : 24002949 
 */
 
 #include <iostream>
