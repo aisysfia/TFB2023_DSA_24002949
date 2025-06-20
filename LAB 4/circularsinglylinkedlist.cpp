@@ -1,11 +1,9 @@
-// Singly Linked List (Circular)
-
+// Circular Singly Linked List 
 /*
 Lab 4
 Name : Nur Aisya Sofia
 ID : 24002949 
 */
-
 
 #include <iostream>
 #include <string>
@@ -54,7 +52,7 @@ public:
         }
 
         Node* current = head;
-        string firstName = head->name; // Store the first node's name
+        string firstName = head->name;
         cout << "\n--- Circular Linked List ---\n";
         do {
             cout << "[" << current->name << "]";
@@ -63,44 +61,55 @@ public:
             }
             current = current->next;
         } while (current != head);
-        cout << " -> [" << firstName << "](cycle continues)\n";
+        cout << " -> [" << firstName << "] (cycle continues)\n";
     }
 
-    // Delete a node by name
+    // Delete a node by name (without using prev pointer)
     void delete_by_name(string targetName) {
         if (head == nullptr) {
             cout << "List is empty. Cannot delete.\n";
             return;
         }
 
-        Node* current = head;
-        Node* prev = tail; // In circular list, previous of head is tail
-
-        do {
-            if (current->name == targetName) {
-                if (current == head) {
-                    head = head->next;
-                    tail->next = head; // Update tail's next to new head
-                    if (current == tail) { // Only one node case
-                        head = nullptr;
-                        tail = nullptr;
-                    }
-                } else {
-                    prev->next = current->next;
-                    if (current == tail) {
-                        tail = prev;
-                    }
-                }
-
-                delete current;
-                cout << "Deleted node: " << targetName << endl;
-                return;
+        // Special case: deleting the head node
+        if (head->name == targetName) {
+            Node* toDelete = head;
+            
+            if (head == tail) { // Only one node
+                head = nullptr;
+                tail = nullptr;
+            } else {
+                head = head->next;
+                tail->next = head;
             }
-            prev = current;
-            current = current->next;
-        } while (current != head);
+            
+            delete toDelete;
+            cout << "Deleted node: " << targetName << endl;
+            return;
+        }
 
-        cout << "Node with name \"" << targetName << "\" not found.\n";
+        // Find the node before the target node
+        Node* beforeTarget = head;
+        while (beforeTarget->next != head && beforeTarget->next->name != targetName) {
+            beforeTarget = beforeTarget->next;
+        }
+
+        // Check if we found the node to delete
+        if (beforeTarget->next == head) {
+            cout << "Node with name \"" << targetName << "\" not found.\n";
+            return;
+        }
+
+        Node* toDelete = beforeTarget->next;
+        beforeTarget->next = toDelete->next;
+        
+        // Update tail if we're deleting the last node
+        if (toDelete == tail) {
+            tail = beforeTarget;
+        }
+        
+        delete toDelete;
+        cout << "Deleted node: " << targetName << endl;
     }
 
     // Destructor to clean up memory
