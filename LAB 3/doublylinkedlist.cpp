@@ -1,5 +1,4 @@
 // Doubly Linked List
-
 /*
 Lab 3
 Name : Nur Aisya Sofia
@@ -54,7 +53,7 @@ public:
         }
 
         Node* current = head;
-        cout << "\nCurrent Doubly Linked List:\n";
+        cout << "\nDoubly Linked List (Forward):\n";
         while (current != nullptr) {
             cout << "[" << current->name << "]";
             if (current->next != nullptr) {
@@ -122,6 +121,17 @@ public:
 
         cout << "Deleted node: " << targetName << endl;
         delete current;
+        
+    }
+    // Destructor to clean up memory
+    ~DoublyLinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current->next;  // Save next pointer before deletion
+            delete current;             // Delete current node
+            current = next;             // Move to next node
+        }
+       
     }
 };
 
