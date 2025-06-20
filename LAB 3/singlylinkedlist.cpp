@@ -1,5 +1,4 @@
 // Singly Linked List
-
 /*
 Lab 3
 Name : Nur Aisya Sofia
@@ -62,13 +61,14 @@ public:
         cout << " -> NULL\n";
     }
 
-    // Delete a node by name
+    // Delete a node by name (without using prev pointer)
     void delete_by_name(string targetName) {
         if (head == nullptr) {
             cout << "List is empty. Cannot delete.\n";
             return;
         }
 
+        // Special case: deleting the head node
         if (head->name == targetName) {
             Node* temp = head;
             head = head->next;
@@ -78,31 +78,43 @@ public:
             return;
         }
 
-        Node* current = head;
-        Node* prev = nullptr;
-
-        while (current != nullptr && current->name != targetName) {
-            prev = current;
-            current = current->next;
+        // Find the node before the target node
+        Node* beforeTarget = head;
+        while (beforeTarget->next != nullptr && beforeTarget->next->name != targetName) {
+            beforeTarget = beforeTarget->next;
         }
 
-        if (current == nullptr) {
+        // Check if we found the node to delete
+        if (beforeTarget->next == nullptr) {
             cout << "Node with name \"" << targetName << "\" not found.\n";
             return;
         }
 
-        prev->next = current->next;
-        if (current == tail) {
-            tail = prev;
+        Node* toDelete = beforeTarget->next;
+        beforeTarget->next = toDelete->next;
+        
+        // Update tail if we're deleting the last node
+        if (toDelete == tail) {
+            tail = beforeTarget;
         }
-
-        delete current;
+        
+        delete toDelete;
         cout << "Deleted node: " << targetName << endl;
+    }
+
+    // Destructor to clean up memory
+    ~LinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
     }
 };
 
 // Main function
-int main () {
+int main() {
     // Step 1: Create initial nodes
     Node node1("Ali");
     Node node2("Ahmed");
