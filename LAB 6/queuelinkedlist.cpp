@@ -20,8 +20,8 @@ struct Node {
     }
 };
 
-// Queue class using Linked List
-class Queue {
+// Queue struct using Linked List
+struct Queue {
 private:
     Node* front;
     Node* rear;
