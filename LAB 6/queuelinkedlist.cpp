@@ -66,7 +66,7 @@ public:
     // Display the queue
     void display() {
         if (front == nullptr) {
-            cout << "Queue is empty. Cannot dequeue.\n";
+            cout << "\nQueue is empty. Cannot dequeue.\n";
             return;
         }
 
